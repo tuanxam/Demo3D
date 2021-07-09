@@ -24,12 +24,13 @@ namespace Player
         }
         private void Move()
         {
-            float x = Input.GetAxisRaw("Horizontal");
-            float z = Input.GetAxisRaw("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-            Vector3 move = transform.right * x + transform.forward * z;
-            characterController.Move(move * move_speed * Time.deltaTime);
+            //Vector3 move = transform.right * x + transform.forward * z;
+            //characterController.Move(move * move_speed * Time.fixedDeltaTime);
 
+            characterController.Move(transform.forward * z * move_speed * Time.fixedDeltaTime);
         }
     }
 }
