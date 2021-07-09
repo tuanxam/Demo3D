@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace Bullet
 {
-    public float move_speed;
-    public GameObject explosion;
-    void Start()
+    public class Bullet : MonoBehaviour
     {
-      
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        transform.Translate(Vector3.forward * move_speed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("wall"))
+        public float move_speed;
+        public GameObject explosion;
+        void Start()
         {
-           var g = Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(g, 1);
-            Destroy(gameObject);
+
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            transform.Translate(Vector3.forward * move_speed * Time.deltaTime);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("wall"))
+            {
+                var g = Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(g, 1);
+                Destroy(gameObject);
+            }
         }
     }
 }
+
