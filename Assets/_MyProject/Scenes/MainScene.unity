@@ -214,7 +214,8 @@ MonoBehaviour:
   _head: {fileID: 1069652629}
   _fpsCam: {fileID: 1069652628}
   _isFullAuto: 1
-  _fireRate: 10
+  _fireRate: 2
+  _magazines: 30
 --- !u!1 &491711496
 GameObject:
   m_ObjectHideFlags: 0
