@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 834394221}
   - component: {fileID: 834394220}
   - component: {fileID: 834394219}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,6 +1533,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1713355044}
   _movementSpeed: 10
+  _jumpHeight: 1.2
+  _gravityValue: -9.81
+  _playerJumpVelocity: {x: 0, y: 0, z: 0}
+  _checkGroundLength: 1.5
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1859376694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,6 +1726,10 @@ PrefabInstance:
     - target: {fileID: 4788554043932245199, guid: c91fdaafa7d94a149af41b77b9035db8, type: 3}
       propertyPath: m_Name
       value: SK_Wep_AK47_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796499484854355549, guid: c91fdaafa7d94a149af41b77b9035db8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c91fdaafa7d94a149af41b77b9035db8, type: 3}

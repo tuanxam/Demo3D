@@ -6,8 +6,8 @@ namespace FPS
 {
     public class SelectableObj : MonoBehaviour
     {
-        [SerializeField]
-        private TextMesh _txtDotPercentage;
+        //[SerializeField]
+        //private TextMesh _txtDotPercentage;
 
         public float DotPercentage { get; set; }
 
@@ -20,7 +20,7 @@ namespace FPS
         // Update is called once per frame
         void Update()
         {
-            _txtDotPercentage.text = DotPercentage.ToString();
+            //_txtDotPercentage.text = DotPercentage.ToString();
         }
     }
 }
