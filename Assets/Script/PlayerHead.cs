@@ -33,7 +33,7 @@ namespace Player
             // xoay gun theo mouse và head ;
             gun.transform.localRotation = transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
 
-            playerBody.Rotate(Vector3.up * x); // xoay body của player theo trục y(xoay theo trái phải);
+            playerBody.Rotate(Vector3.up, x); // xoay body của player theo trục y(xoay theo trái phải);
         }
     }
 }

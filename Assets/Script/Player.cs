@@ -28,9 +28,16 @@ namespace Player
             float z = Input.GetAxisRaw("Vertical");
 
             Vector3 move = transform.right * x + transform.forward * z;
+    
             characterController.Move(move * move_speed * Time.deltaTime);
 
         }
+
+        private void CheckItem()
+        {
+           
+        }
+
     }
 }
 
