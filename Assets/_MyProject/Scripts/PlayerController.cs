@@ -41,11 +41,15 @@ namespace FPS
 
             var ray = new Ray(transform.position, Vector3.down);
             var hitInfo = new RaycastHit();
-            var hitSomething = Physics.Raycast(ray, out hitInfo, _checkGroundLength, _groundMask);
-            if (hitSomething)
+            var hitGround = Physics.Raycast(ray, out hitInfo, _checkGroundLength, _groundMask);
+            if (hitGround)
             {
                 //Debug.Log($"Hit {hitInfo.collider.name}");
                 _isGrounded = true;
+            }
+            else
+            {
+                _isGrounded = false;
             }
 
             // Check for reset jump velocity.

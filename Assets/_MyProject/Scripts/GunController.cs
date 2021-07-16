@@ -15,7 +15,7 @@ namespace FPS
         private bool _isFullAuto;
 
         [SerializeField]
-        private int _fireRate;
+        private float _fireRate;
         [SerializeField]
         private int _magazines;
         private float _nextShootTime;
@@ -48,9 +48,10 @@ namespace FPS
                     Debug.DrawRay(_fpsCam.transform.position, _fpsCam.transform.forward * 10f, Color.blue);
                     if (isHitSomething)
                     {
-                        Debug.Log($"Hit {hit.collider.name}");
-                        _magazines--;
+                        //Debug.Log($"Hit {hit.collider.name}");
+                        
                     }
+                    _magazines--;
                 }
             }
             else
