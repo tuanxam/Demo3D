@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
-{
+
     public class PlayerHead : MonoBehaviour
     {
         public float mousespeed;
@@ -12,7 +11,7 @@ namespace Player
         private float _xRotation;
         void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+          //  Cursor.lockState = CursorLockMode.Locked;
         }
 
         // Update is called once per frame
@@ -36,5 +35,4 @@ namespace Player
             playerBody.Rotate(Vector3.up, x); // xoay body của player theo trục y(xoay theo trái phải);
         }
     }
-}
 
