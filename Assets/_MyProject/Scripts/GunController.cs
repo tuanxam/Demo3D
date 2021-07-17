@@ -6,6 +6,9 @@ namespace FPS
 {
     public class GunController : MonoBehaviour
     {
+        public GameObject parExplo_Prefab;
+        public TrailEffect trail_Prefab;
+
         [SerializeField]
         private Transform _head;
         [SerializeField]
@@ -15,7 +18,7 @@ namespace FPS
         private bool _isFullAuto;
 
         [SerializeField]
-        private float _fireRate;
+        private int _fireRate;
         [SerializeField]
         private int _magazines;
         private float _nextShootTime;
@@ -48,10 +51,19 @@ namespace FPS
                     Debug.DrawRay(_fpsCam.transform.position, _fpsCam.transform.forward * 10f, Color.blue);
                     if (isHitSomething)
                     {
-                        //Debug.Log($"Hit {hit.collider.name}");
-                        
+                        Debug.Log($"Hit {hit.collider.name}");
+                        _magazines--;
+
+                        if(hit.collider.CompareTag("enemy"))
+                        {
+                            hit.collider.gameObject.GetComponent<Enemy>().Currenthp -= 1;
+                            var g = Instantiate(parExplo_Prefab, hit.point, Quaternion.identity);
+                            Destroy(g, 1f);
+
+                           TrailEffect trail = Instantiate(trail_Prefab, transform.position, Quaternion.identity);
+                           trail.Move(hit.collider.gameObject.transform.position - transform.position);
+                        }
                     }
-                    _magazines--;
                 }
             }
             else
