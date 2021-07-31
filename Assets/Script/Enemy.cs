@@ -2,37 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-namespace FPS {
-
-    public class Enemy : MonoBehaviour
+using DG.Tweening;
+namespace FPS
+{
+    public class Enemy : MonoBehaviour, IShootable
     {
         public float lookRadius;
-
         public float maxhp;
 
-        [HideInInspector]
+        [SerializeField]
+        private MeshRenderer _meshRenderer;
+        [SerializeField]
+        private Color _colorHit;
+        [SerializeField]
+        private Color _colorNormal;
+        [SerializeField]
+        private float _changeColorTime;
+
         private float currenthp;
-
-
         private NavMeshAgent enemy_ai;
 
-        public float Currenthp { get => currenthp;
-            set {
+        public float CurrentHp
+        {
+            get => currenthp;
+            set
+            {
                 currenthp = value;
                 Debug.Log(currenthp);
+                Sequence seq = DOTween.Sequence();
+                seq.Append(_meshRenderer.material.DOBlendableColor(_colorNormal, _changeColorTime));
+                seq.Append(_meshRenderer.material.DOBlendableColor(_colorHit, _changeColorTime));
+                seq.Append(_meshRenderer.material.DOBlendableColor(_colorNormal, _changeColorTime));
                 Death();
-            }  }
+            }
+        }
 
         void Start()
         {
             enemy_ai = GetComponent<NavMeshAgent>();
-            Currenthp = maxhp;
+            CurrentHp = maxhp;
         }
 
         void Update()
-        {                     
-            if(Vector3.Distance(PlayerController._instance.transform.position, transform.position) <= lookRadius)
+        {
+            if (Vector3.Distance(PlayerController._instance.transform.position, transform.position) <= lookRadius)
             {
                 enemy_ai.SetDestination(PlayerController._instance.transform.position);
             }
@@ -40,9 +53,9 @@ namespace FPS {
 
         private void Death()
         {
-            if(Currenthp <= 0)
+            if (CurrentHp <= 0)
             {
-                Destroy(gameObject);              
+                Destroy(gameObject);
             }
         }
 
@@ -56,6 +69,12 @@ namespace FPS {
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, lookRadius);
+        }
+
+        public void InstantiateEffect(GameObject effectPrefab, Vector3 hitPosition, Quaternion rotation, float destroyTime)
+        {
+            var hitEffect = Instantiate(effectPrefab, hitPosition, rotation);
+            Destroy(hitEffect, destroyTime);
         }
     }
 }

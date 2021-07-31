@@ -51,7 +51,7 @@ namespace FPS
             var z = Input.GetAxis("Vertical");  // Trong trường hợp này. Vertical sẽ là trục Z của chúng ta.
             var move = transform.forward * z + transform.right * x; // * cho direction forward(trục z) và right(trục x).
 
-             // Apply movement. 
+            // Apply movement. 
 
             //_isGrounded = _characterController.isGrounded;
 
@@ -77,12 +77,17 @@ namespace FPS
             //    //_playerJumpVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
             //}
 
-            // Apply gravity here.
+            // Check if player stands on ground.
+            var ray = new Ray(transform.position, Vector3.down);
+            var hitInfo = new RaycastHit();
+            _isGrounded = Physics.Raycast(ray, out hitInfo, _checkGroundLength, _groundMask);
 
-             if(Input.GetKeyDown(KeyCode.Space))
-             {
+            // Apply jump action.
+            if(Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            {
                 _dirY = _jumpHeight; 
-             }
+            }
+            // Apply gravity here.
             _dirY -= _gravityValue * Time.deltaTime;
             move.y = _dirY;
             _characterController.Move(move * _movementSpeed * Time.deltaTime);
